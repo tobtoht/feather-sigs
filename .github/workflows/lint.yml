@@ -1,0 +1,15 @@
+name: lint
+
+on: [pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: install dependencies
+        run: sudo apt update && sudo apt install -y git libgpgme-dev cargo
+      - name: build touched-files-check
+        run: mkdir out-dir && cd ./contrib/touched-files-check && cargo build && mv ./target/debug/touched-files-check ../../out-dir/
+      - name: run lint script
+        run: ./out-dir/touched-files-check "HEAD~..HEAD"
