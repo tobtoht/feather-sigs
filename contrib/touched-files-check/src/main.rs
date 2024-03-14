@@ -59,7 +59,7 @@ fn check(touched_files: &str) -> Result<(Vec<&str>, HashSet<&str>), String> {
             (l.next().unwrap(), l.next().unwrap())
         };
         println!("Touched file: {status} {file}");
-        if ["README.md", ".cirrus.yml", "contrib/"]
+        if ["README.md", "ERRATA.md", ".cirrus.yml", "contrib/"]
             .iter()
             .any(|ignore| file.starts_with(ignore))
         {
